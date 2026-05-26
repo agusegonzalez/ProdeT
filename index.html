@@ -272,7 +272,7 @@
 
         const ADMIN_UIDS = ["PcIXOLk7ZmY6JPR9dGWfnm4M0862"];
 
-        const fireApp = initializeApp(firebaseConfig);
+        const fireApp = initializeApp(firebaseConfig, "prode2026");
         const auth = getAuth(fireApp);
         const db = getDatabase(fireApp);
         const provider = new GoogleAuthProvider();
@@ -466,46 +466,65 @@
         });
 
         // ============================================================
-        // LOBBY - USA onValue EN LUGAR DE get() PARA EVITAR EL BUG
-        // onValue escucha en tiempo real: si Firebase escribe el dato
-        // medio segundo después, la UI igual se actualiza sola.
+        // LOBBY - onValue con protección contra snapshot vacío inicial
         // ============================================================
+        async function renderGrupos(snap, container) {
+            container.innerHTML = "";
+
+            if (!snap.exists()) {
+                container.innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:10px; color:var(--text-muted); font-weight:700;">Aún no estás en ningún torneo. ¡Unite o creá uno!</div>`;
+                return;
+            }
+
+            const ids = Object.keys(snap.val());
+            const configs = await Promise.all(
+                ids.map(id => get(ref(db, `grupos/${id}/config`)))
+            );
+
+            // Limpiar antes de renderizar para evitar duplicados
+            container.innerHTML = "";
+
+            configs.forEach((gSnap, i) => {
+                if (!gSnap.exists()) return;
+                const id = ids[i];
+                const div = document.createElement("div");
+                div.className = "group-item";
+                div.innerHTML = `<div class="group-icon"><i class="fa-solid fa-users-viewfinder"></i></div><div class="group-name">${gSnap.val().nombre}</div>`;
+                div.onclick = () => entrarAGrupo(id, gSnap.val().nombre);
+                container.appendChild(div);
+            });
+        }
+
         function cargarLobby() {
             const container = document.getElementById("lobby-mis-grupos");
             container.innerHTML = `<div class="loading">Sincronizando tus ligas...</div>`;
 
-            // Cancelar listener anterior si existe (ej: logout/login rápido)
             if (lobbyUnsubscribe) {
                 lobbyUnsubscribe();
                 lobbyUnsubscribe = null;
             }
 
             const misGruposRef = ref(db, `usuarios/${currentUser.uid}/mis_grupos`);
+            let primeraVez = true;
 
             lobbyUnsubscribe = onValue(misGruposRef, async (snap) => {
-                container.innerHTML = "";
-
-                if (!snap.exists()) {
-                    container.innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:10px; color:var(--text-muted); font-weight:700;">Aún no estás en ningún torneo. ¡Unite o creá uno!</div>`;
+                // Si es la primera vez y el snapshot está vacío, esperamos 1.5s
+                // y leemos directo desde el servidor para evitar cache fría
+                if (primeraVez && !snap.exists()) {
+                    primeraVez = false;
+                    setTimeout(async () => {
+                        try {
+                            const snapForzado = await get(ref(db, `usuarios/${currentUser.uid}/mis_grupos`));
+                            await renderGrupos(snapForzado, container);
+                        } catch(e) {
+                            console.error("Error al forzar lectura:", e);
+                        }
+                    }, 1500);
                     return;
                 }
+                primeraVez = false;
+                await renderGrupos(snap, container);
 
-                const ids = Object.keys(snap.val());
-
-                // Cargamos los configs de todos los grupos en paralelo
-                const configs = await Promise.all(
-                    ids.map(id => get(ref(db, `grupos/${id}/config`)))
-                );
-
-                configs.forEach((gSnap, i) => {
-                    if (!gSnap.exists()) return;
-                    const id = ids[i];
-                    const div = document.createElement("div");
-                    div.className = "group-item";
-                    div.innerHTML = `<div class="group-icon"><i class="fa-solid fa-users-viewfinder"></i></div><div class="group-name">${gSnap.val().nombre}</div>`;
-                    div.onclick = () => entrarAGrupo(id, gSnap.val().nombre);
-                    container.appendChild(div);
-                });
             }, (error) => {
                 console.error("Error en listener de grupos:", error);
                 container.innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:10px; color:var(--error); font-weight:700;">Error al cargar tus ligas. Recargá la página.</div>`;
