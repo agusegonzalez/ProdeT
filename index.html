@@ -256,7 +256,8 @@
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-        import { getAuth, GoogleAuthProvider, signInWithPopup, signInWithRedirect, getRedirectResult, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+        import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+
         import { getDatabase, ref, get, set, update, push, onValue, off } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 
         const firebaseConfig = {
@@ -384,11 +385,30 @@
 
         // ============================================================
         // AUTH
+        // El problema COOP de Vercel hace que onAuthStateChanged dispare
+        // user=null justo después del popup, como si hubiera logout.
+        // Solución: ignoramos el null durante 3 segundos después de
+        // iniciar el login. Si es un logout real (btn-logout), usamos
+        // una flag para permitirlo.
         // ============================================================
-        document.getElementById("btn-login").onclick = () => signInWithRedirect(auth, provider);
+        let loginEnCurso = false;
+        let logoutIntencional = false;
+
+        document.getElementById("btn-login").onclick = async () => {
+            loginEnCurso = true;
+            try {
+                await signInWithPopup(auth, provider);
+            } catch (e) {
+                loginEnCurso = false;
+                if (e.code !== 'auth/popup-closed-by-user') {
+                    toast("❌ Error al iniciar sesión");
+                    console.error(e);
+                }
+            }
+        };
 
         document.getElementById("btn-logout").onclick = () => {
-            // Cancelar el listener del lobby antes de cerrar sesión
+            logoutIntencional = true;
             if (lobbyUnsubscribe) {
                 lobbyUnsubscribe();
                 lobbyUnsubscribe = null;
@@ -399,7 +419,6 @@
         document.getElementById("btn-back-lobby").onclick = () => {
             switchView('view-lobby');
             document.getElementById("btn-guardar-todo").style.display = "none";
-            // El lobby ya está escuchando en tiempo real, no hace falta recargar
         };
 
         document.getElementById("btn-share-id").onclick = () => {
@@ -408,18 +427,14 @@
         };
 
         onAuthStateChanged(auth, async (user) => {
-            try {
-                await getRedirectResult(auth);
-            } catch (e) {
-                console.error("Redirect error:", e);
-            }
             if (user) {
+                loginEnCurso = false;
+                logoutIntencional = false;
                 currentUser = user;
                 document.getElementById("user-name").textContent = user.displayName.split(" ")[0];
                 document.getElementById("user-avatar").textContent = user.displayName[0].toUpperCase();
 
                 // Solo actualizamos el sub-nodo "perfil", NUNCA el nodo raíz del usuario.
-                // Esto garantiza que "mis_grupos" nunca se borre al hacer login.
                 const perfilRef = ref(db, `usuarios/${user.uid}/perfil`);
                 await update(perfilRef, {
                     nombre: user.displayName || user.email,
@@ -433,8 +448,14 @@
                 cargarLobby();
                 switchView('view-lobby');
             } else {
+                // Ignorar el null espurio que dispara COOP después del popup
+                // Solo procesamos el null si fue un logout intencional
+                if (loginEnCurso || (currentUser !== null && !logoutIntencional)) {
+                    console.log("null espurio de COOP ignorado");
+                    return;
+                }
                 currentUser = null;
-                // Cancelar listener al cerrar sesión
+                logoutIntencional = false;
                 if (lobbyUnsubscribe) {
                     lobbyUnsubscribe();
                     lobbyUnsubscribe = null;
