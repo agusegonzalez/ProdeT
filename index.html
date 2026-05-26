@@ -423,8 +423,11 @@
                 document.getElementById("user-name").textContent = user.displayName.split(" ")[0];
                 document.getElementById("user-avatar").textContent = user.displayName[0].toUpperCase();
                 
-                await set(ref(db, `usuarios/${user.uid}/perfil`), {
-                    nombre: user.displayName || user.email, email: user.email
+                const perfilRef = ref(db, `usuarios/${user.uid}/perfil`);
+                console.log("Intentando cargar perfil para UID:", user.uid);
+                await update(perfilRef, {
+                    nombre: user.displayName || user.email, 
+                    email: user.email
                 });
 
                 if (ADMIN_UIDS.includes(user.uid)) { document.getElementById("tab-admin").style.display = "block"; }
@@ -466,40 +469,50 @@
             const nombre = document.getElementById("input-nuevo-grupo").value.trim();
             if (!nombre) return toast("⚠️ Ponéle un nombre a la liga");
 
-            // BLINDAJE DE LIMITE DE GRUPOS
             const snapGrupos = await get(ref(db, `usuarios/${currentUser.uid}/mis_grupos`));
             const misGrupos = snapGrupos.exists() ? Object.keys(snapGrupos.val()) : [];
-            const TOPE_GRUPOS = 5; 
-
-            if (misGrupos.length >= TOPE_GRUPOS) {
-                return toast(`⚠️ Límite alcanzado: Máximo ${TOPE_GRUPOS} ligas.`);
-            }
-            
+            if (misGrupos.length >= 5) return toast(`⚠️ Límite alcanzado.`);
+    
             const nuevoGrupoRef = push(ref(db, "grupos"));
             const id = nuevoGrupoRef.key;
 
-            await set(ref(db, `grupos/${id}/config`), { nombre: nombre, creador: currentUser.uid });
-            await set(ref(db, `grupos/${id}/participantes/${currentUser.uid}`), true);
-            await set(ref(db, `usuarios/${currentUser.uid}/mis_grupos/${id}`), true);
-            
-            document.getElementById("input-nuevo-grupo").value = "";
-            toast("✅ ¡Liga creada con éxito!");
-            cargarLobby();
+    // Usamos un solo UPDATE para todo
+            const updates = {};
+            updates[`grupos/${id}/config`] = { nombre: nombre, creador: currentUser.uid };
+            updates[`grupos/${id}/participantes/${currentUser.uid}`] = true;
+            updates[`usuarios/${currentUser.uid}/mis_grupos/${id}`] = true;
+
+            try {
+                await update(ref(db), updates);
+                document.getElementById("input-nuevo-grupo").value = "";
+                toast("✅ ¡Liga creada con éxito!");
+                cargarLobby();
+            } catch (error) {
+                toast("❌ Error al crear la liga");
+                console.error(error);
+            }
         };
 
         document.getElementById("btn-unirse-id").onclick = async () => {
             const id = document.getElementById("input-unirse-id").value.trim();
             if (!id) return toast("⚠️ Pegá el ID del grupo primero");
-            
+    
             const gSnap = await get(ref(db, `grupos/${id}`));
             if (gSnap.exists()) {
-                await set(ref(db, `grupos/${id}/participantes/${currentUser.uid}`), true);
-                await set(ref(db, `usuarios/${currentUser.uid}/mis_grupos/${id}`), true);
-                document.getElementById("input-unirse-id").value = "";
-                toast("🤝 ¡Adentro! Te uniste a la liga.");
-                cargarLobby();
+                const updates = {};
+                updates[`grupos/${id}/participantes/${currentUser.uid}`] = true;
+                updates[`usuarios/${currentUser.uid}/mis_grupos/${id}`] = true;
+
+                try {
+                    await update(ref(db), updates);
+                    document.getElementById("input-unirse-id").value = "";
+                    toast("🤝 ¡Adentro!");
+                    cargarLobby();
+                } catch (error) {
+                    toast("❌ Error al unirse");
+                }
             } else {
-                toast("❌ No encontré ninguna liga con ese ID.");
+                toast("❌ No encontré esa liga.");
             }
         };
 
