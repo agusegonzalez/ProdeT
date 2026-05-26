@@ -26,11 +26,9 @@
             font-family: 'Urbanist', sans-serif; min-height: 100vh;
         }
 
-        /* --- Estructura de Vistas --- */
         .view { display: none; min-height: 100vh; padding: 20px; max-width: 650px; margin: 0 auto; padding-bottom: 100px; }
         .view.active { display: flex; flex-direction: column; }
 
-        /* --- Login --- */
         #view-login { justify-content: center; align-items: center; text-align: center; }
         .hero-title { font-size: 4rem; font-weight: 900; letter-spacing: -2px; line-height: 1; margin-bottom: 5px; }
         .hero-title span { color: var(--accent); }
@@ -42,7 +40,6 @@
         }
         .btn-google:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(16,185,129,0.3); }
 
-        /* --- Encabezados --- */
         header { 
             display: flex; justify-content: space-between; align-items: center; 
             padding: 15px 0; border-bottom: 1px solid rgba(255,255,255,0.05); margin-bottom: 25px;
@@ -53,7 +50,6 @@
             display: flex; align-items: center; justify-content: center; font-weight: 900; color: #000; font-size: 1.2rem;
         }
 
-        /* --- Tarjetas y Contenedores --- */
         .section-card {
             background: var(--surface); border-radius: 20px; padding: 24px;
             margin-bottom: 20px; border: 1px solid rgba(255,255,255,0.05);
@@ -76,17 +72,15 @@
             padding: 14px; color: #fff; font-family: inherit; font-size: 1rem; font-weight: 600;
         }
         input:focus { outline: none; border-color: var(--accent); }
-        .btn-icon { background: var(--accent); border: none; border-radius: 12px; width: 55px; color: #000; cursor: pointer; font-size: 1.2rem; transition: 0.2s; }
+        .btn-icon { background: var(--accent); border: none; border-radius: 12px; width: 55px; color: #000; cursor: pointer; font-size: 1.2rem; transition: 0.2s; flex-shrink: 0; }
         .btn-icon:hover { background: var(--accent-hover); }
 
-        /* --- Tabs Internas del Juego --- */
         .tabs-container { display: flex; background: var(--surface); padding: 6px; border-radius: 14px; margin-bottom: 25px; gap: 5px; border: 1px solid rgba(255,255,255,0.05); }
         .tab-btn { flex: 1; background: none; border: none; color: var(--text-muted); padding: 14px; font-family: inherit; font-weight: 800; border-radius: 10px; cursor: pointer; font-size: 0.9rem; transition: 0.2s; }
         .tab-btn.active { background: var(--surface-light); color: var(--accent); }
         .sub-view { display: none; }
         .sub-view.active { display: block; }
 
-        /* --- Elementos del Fixture --- */
         .frase-card { background: rgba(16, 185, 129, 0.05); border: 1px dashed var(--accent); border-radius: 16px; padding: 15px; text-align: center; font-style: italic; font-size: 0.95rem; font-weight: 600; color: var(--accent); margin-bottom: 20px; }
         .fase-label { background: var(--accent); color: #000; padding: 6px 14px; border-radius: 20px; font-weight: 900; font-size: 0.75rem; margin: 20px 0 12px 0; display: inline-block; text-transform: uppercase; letter-spacing: 1px; }
         
@@ -107,24 +101,12 @@
         .pronostico-area { display: flex; align-items: center; justify-content: space-between; margin-top: 18px; padding-top: 18px; border-top: 1px dashed rgba(255,255,255,0.1); }
         .score-inputs { display: flex; align-items: center; gap: 8px; }
         
-        /* SCORE-INPUT CENTRADO PERFECTO */
         .score-input { 
-            width: 50px; 
-            height: 50px; 
-            text-align: center; 
-            font-size: 1.3rem; 
-            background: var(--surface-light); 
-            border: 2px solid #334155; 
-            border-radius: 12px; 
-            color: #fff; 
-            font-weight: 900; 
-            font-family: inherit; 
-            transition: 0.2s; 
-            padding: 0 !important;
-            line-height: 46px; 
-            -webkit-appearance: none;
-            -moz-appearance: textfield;
-            appearance: none;
+            width: 50px; height: 50px; text-align: center; font-size: 1.3rem; 
+            background: var(--surface-light); border: 2px solid #334155; border-radius: 12px; 
+            color: #fff; font-weight: 900; font-family: inherit; transition: 0.2s; 
+            padding: 0 !important; line-height: 46px; 
+            -webkit-appearance: none; -moz-appearance: textfield; appearance: none;
         }
         .score-input::-webkit-outer-spin-button,
         .score-input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
@@ -139,11 +121,9 @@
         .pts-1 { background: #3b82f6; color: #fff; }
         .pts-0 { background: #475569; color: #fff; }
 
-        /* --- Botón Flotante Global --- */
         .btn-float-global { position: fixed; bottom: 30px; right: 20px; z-index: 999; background: var(--accent); color: #000; border: none; padding: 16px 28px; border-radius: 50px; font-weight: 900; font-size: 1rem; font-family: inherit; cursor: pointer; box-shadow: 0 10px 25px rgba(16,185,129,0.4); transition: transform 0.2s; display: flex; align-items: center; gap: 10px; }
         .btn-float-global:hover { transform: translateY(-3px); }
 
-        /* --- Tablas de Posiciones --- */
         .tabla-pos table { width: 100%; border-collapse: separate; border-spacing: 0; margin-top: 15px; background: var(--surface); border-radius: 16px; overflow: hidden; border: 1px solid rgba(255,255,255,0.05); }
         .tabla-pos th { background: var(--surface-light); padding: 16px 12px; font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted); font-weight: 900; text-align: center; }
         .tabla-pos th:first-child { text-align: left; padding-left: 20px; }
@@ -157,20 +137,18 @@
         .pos-n { background: var(--surface-light); color: var(--text-muted); }
         .pts-total { font-weight: 900; font-size: 1.2rem; color: var(--accent); }
 
-        /* --- Admin --- */
         .admin-card { background: var(--surface); border-radius: 16px; padding: 15px; border: 1px solid rgba(255,255,255,0.05); margin-bottom: 12px; }
         .btn-admin-action { width: 100%; background: var(--surface-light); color: #fff; border: 2px solid #334155; padding: 16px; border-radius: 14px; font-weight: 800; font-family: inherit; font-size: 1rem; cursor: pointer; margin-top: 10px; display: flex; align-items: center; justify-content: center; gap: 10px; transition: 0.2s; }
         .btn-admin-action:hover { background: #334155; }
         .btn-wsp { background: #22c55e; border-color: #16a34a; color: #000; }
         .btn-wsp:hover { background: #16a34a; border-color: #15803d; }
 
-        /* --- Utilidades --- */
         .btn-back { background: none; border: none; color: var(--accent); font-size: 1.4rem; cursor: pointer; padding: 5px; }
         .badge-estado { font-size: 0.7rem; font-weight: 900; padding: 4px 12px; border-radius: 20px; text-transform: uppercase; }
         .estado-pendiente { background: var(--surface-light); color: var(--text-muted); }
         .estado-finalizado { background: rgba(16, 185, 129, 0.2); color: var(--accent); }
         
-        #toast { position: fixed; bottom: -80px; left: 50%; transform: translateX(-50%); background: var(--accent); color: #000; padding: 14px 28px; border-radius: 50px; font-weight: 900; font-size: 1rem; transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); z-index: 2000; box-shadow: 0 10px 25px rgba(0,0,0,0.5); border: 2px solid #059669; }
+        #toast { position: fixed; bottom: -80px; left: 50%; transform: translateX(-50%); background: var(--accent); color: #000; padding: 14px 28px; border-radius: 50px; font-weight: 900; font-size: 1rem; transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); z-index: 2000; box-shadow: 0 10px 25px rgba(0,0,0,0.5); border: 2px solid #059669; white-space: nowrap; }
         #toast.visible { bottom: 40px; }
         .loading { text-align: center; padding: 50px; color: var(--text-muted); font-weight: 700; font-size: 1.1rem; }
         .leyenda { font-size: 0.8rem; color: var(--text-muted); text-align: center; margin-top: 20px; font-weight: 700; }
@@ -179,12 +157,7 @@
             .hero-title { font-size: 3rem; }
             .equipo-bandera-img { width: 40px; height: 28px; }
             .equipo-nombre { font-size: 0.75rem; }
-            .score-input { 
-                width: 45px; 
-                height: 45px; 
-                font-size: 1.1rem; 
-                line-height: 41px; 
-            }
+            .score-input { width: 45px; height: 45px; font-size: 1.1rem; line-height: 41px; }
         }
     </style>
 </head>
@@ -284,7 +257,7 @@
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
         import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
-        import { getDatabase, ref, get, set, update, push } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+        import { getDatabase, ref, get, set, update, push, onValue, off } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyC7St0xfZL1mZZ7hSVXYFs9F2_el7RKMoI",
@@ -307,6 +280,12 @@
         let GRUPO_ACTUAL_ID = null;
         let partidosCache = {};
         let pronosticosCache = {};
+
+        // ============================================================
+        // LISTENER ACTIVO DE LOBBY - SOLUCIONA EL BUG DE GRUPOS
+        // Se guarda la función de cancelación para limpiarla al salir
+        // ============================================================
+        let lobbyUnsubscribe = null;
 
         const frases = [
             "🔮 El que la ve antes, gana.",
@@ -393,23 +372,34 @@
         function switchView(viewId) {
             document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
             document.getElementById(viewId).classList.add('active');
-            window.scrollTo(0,0);
+            window.scrollTo(0, 0);
         }
 
         function toast(msg) {
             const t = document.getElementById("toast");
-            t.textContent = msg; t.classList.add("visible");
+            t.textContent = msg;
+            t.classList.add("visible");
             setTimeout(() => t.classList.remove("visible"), 2800);
         }
 
-        // --- AUTH & NAVEGACION ---
+        // ============================================================
+        // AUTH
+        // ============================================================
         document.getElementById("btn-login").onclick = () => signInWithPopup(auth, provider);
-        document.getElementById("btn-logout").onclick = () => signOut(auth);
-        
+
+        document.getElementById("btn-logout").onclick = () => {
+            // Cancelar el listener del lobby antes de cerrar sesión
+            if (lobbyUnsubscribe) {
+                lobbyUnsubscribe();
+                lobbyUnsubscribe = null;
+            }
+            signOut(auth);
+        };
+
         document.getElementById("btn-back-lobby").onclick = () => {
             switchView('view-lobby');
             document.getElementById("btn-guardar-todo").style.display = "none";
-            cargarLobby();
+            // El lobby ya está escuchando en tiempo real, no hace falta recargar
         };
 
         document.getElementById("btn-share-id").onclick = () => {
@@ -422,61 +412,94 @@
                 currentUser = user;
                 document.getElementById("user-name").textContent = user.displayName.split(" ")[0];
                 document.getElementById("user-avatar").textContent = user.displayName[0].toUpperCase();
-                
+
+                // Solo actualizamos el sub-nodo "perfil", NUNCA el nodo raíz del usuario.
+                // Esto garantiza que "mis_grupos" nunca se borre al hacer login.
                 const perfilRef = ref(db, `usuarios/${user.uid}/perfil`);
-                console.log("Intentando cargar perfil para UID:", user.uid);
                 await update(perfilRef, {
-                    nombre: user.displayName || user.email, 
+                    nombre: user.displayName || user.email,
                     email: user.email
                 });
 
-                if (ADMIN_UIDS.includes(user.uid)) { document.getElementById("tab-admin").style.display = "block"; }
-                
+                if (ADMIN_UIDS.includes(user.uid)) {
+                    document.getElementById("tab-admin").style.display = "block";
+                }
+
                 cargarLobby();
                 switchView('view-lobby');
             } else {
                 currentUser = null;
+                // Cancelar listener al cerrar sesión
+                if (lobbyUnsubscribe) {
+                    lobbyUnsubscribe();
+                    lobbyUnsubscribe = null;
+                }
                 switchView('view-login');
                 document.getElementById("btn-guardar-todo").style.display = "none";
             }
         });
 
-        // --- LÓGICA DE LOBBY Y LIMITE DE GRUPOS ---
-        async function cargarLobby() {
+        // ============================================================
+        // LOBBY - USA onValue EN LUGAR DE get() PARA EVITAR EL BUG
+        // onValue escucha en tiempo real: si Firebase escribe el dato
+        // medio segundo después, la UI igual se actualiza sola.
+        // ============================================================
+        function cargarLobby() {
             const container = document.getElementById("lobby-mis-grupos");
             container.innerHTML = `<div class="loading">Sincronizando tus ligas...</div>`;
-            
-            const snap = await get(ref(db, `usuarios/${currentUser.uid}/mis_grupos`));
-            container.innerHTML = "";
-            
-            if (snap.exists()) {
-                for (let id of Object.keys(snap.val())) {
-                    const gSnap = await get(ref(db, `grupos/${id}/config`));
-                    if (gSnap.exists()) {
-                        const div = document.createElement("div");
-                        div.className = "group-item";
-                        div.innerHTML = `<div class="group-icon"><i class="fa-solid fa-users-viewfinder"></i></div><div class="group-name">${gSnap.val().nombre}</div>`;
-                        div.onclick = () => entrarAGrupo(id, gSnap.val().nombre);
-                        container.appendChild(div);
-                    }
-                }
-            } else {
-                container.innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:10px; color:var(--text-muted); font-weight:700;">Aún no estás en ningún torneo. ¡Unite o creá uno!</div>`;
+
+            // Cancelar listener anterior si existe (ej: logout/login rápido)
+            if (lobbyUnsubscribe) {
+                lobbyUnsubscribe();
+                lobbyUnsubscribe = null;
             }
+
+            const misGruposRef = ref(db, `usuarios/${currentUser.uid}/mis_grupos`);
+
+            lobbyUnsubscribe = onValue(misGruposRef, async (snap) => {
+                container.innerHTML = "";
+
+                if (!snap.exists()) {
+                    container.innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:10px; color:var(--text-muted); font-weight:700;">Aún no estás en ningún torneo. ¡Unite o creá uno!</div>`;
+                    return;
+                }
+
+                const ids = Object.keys(snap.val());
+
+                // Cargamos los configs de todos los grupos en paralelo
+                const configs = await Promise.all(
+                    ids.map(id => get(ref(db, `grupos/${id}/config`)))
+                );
+
+                configs.forEach((gSnap, i) => {
+                    if (!gSnap.exists()) return;
+                    const id = ids[i];
+                    const div = document.createElement("div");
+                    div.className = "group-item";
+                    div.innerHTML = `<div class="group-icon"><i class="fa-solid fa-users-viewfinder"></i></div><div class="group-name">${gSnap.val().nombre}</div>`;
+                    div.onclick = () => entrarAGrupo(id, gSnap.val().nombre);
+                    container.appendChild(div);
+                });
+            }, (error) => {
+                console.error("Error en listener de grupos:", error);
+                container.innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:10px; color:var(--error); font-weight:700;">Error al cargar tus ligas. Recargá la página.</div>`;
+            });
         }
 
+        // ============================================================
+        // CREAR GRUPO
+        // ============================================================
         document.getElementById("btn-crear-grupo").onclick = async () => {
             const nombre = document.getElementById("input-nuevo-grupo").value.trim();
             if (!nombre) return toast("⚠️ Ponéle un nombre a la liga");
 
             const snapGrupos = await get(ref(db, `usuarios/${currentUser.uid}/mis_grupos`));
             const misGrupos = snapGrupos.exists() ? Object.keys(snapGrupos.val()) : [];
-            if (misGrupos.length >= 5) return toast(`⚠️ Límite alcanzado.`);
-    
+            if (misGrupos.length >= 5) return toast("⚠️ Límite alcanzado.");
+
             const nuevoGrupoRef = push(ref(db, "grupos"));
             const id = nuevoGrupoRef.key;
 
-    // Usamos un solo UPDATE para todo
             const updates = {};
             updates[`grupos/${id}/config`] = { nombre: nombre, creador: currentUser.uid };
             updates[`grupos/${id}/participantes/${currentUser.uid}`] = true;
@@ -486,75 +509,82 @@
                 await update(ref(db), updates);
                 document.getElementById("input-nuevo-grupo").value = "";
                 toast("✅ ¡Liga creada con éxito!");
-                cargarLobby();
+                // El listener onValue detecta el cambio automáticamente, no hace falta llamar cargarLobby()
             } catch (error) {
                 toast("❌ Error al crear la liga");
                 console.error(error);
             }
         };
 
+        // ============================================================
+        // UNIRSE A GRUPO
+        // ============================================================
         document.getElementById("btn-unirse-id").onclick = async () => {
             const id = document.getElementById("input-unirse-id").value.trim();
             if (!id) return toast("⚠️ Pegá el ID del grupo primero");
-    
-            const gSnap = await get(ref(db, `grupos/${id}`));
-            if (gSnap.exists()) {
-                const updates = {};
-                updates[`grupos/${id}/participantes/${currentUser.uid}`] = true;
-                updates[`usuarios/${currentUser.uid}/mis_grupos/${id}`] = true;
 
-                try {
-                    await update(ref(db), updates);
-                    document.getElementById("input-unirse-id").value = "";
-                    toast("🤝 ¡Adentro!");
-                    cargarLobby();
-                } catch (error) {
-                    toast("❌ Error al unirse");
-                }
-            } else {
-                toast("❌ No encontré esa liga.");
+            const gSnap = await get(ref(db, `grupos/${id}`));
+            if (!gSnap.exists()) return toast("❌ No encontré esa liga.");
+
+            // Verificar si ya pertenece
+            const yaEsta = await get(ref(db, `usuarios/${currentUser.uid}/mis_grupos/${id}`));
+            if (yaEsta.exists()) return toast("ℹ️ Ya estás en esa liga");
+
+            const updates = {};
+            updates[`grupos/${id}/participantes/${currentUser.uid}`] = true;
+            updates[`usuarios/${currentUser.uid}/mis_grupos/${id}`] = true;
+
+            try {
+                await update(ref(db), updates);
+                document.getElementById("input-unirse-id").value = "";
+                toast("🤝 ¡Adentro!");
+                // El listener onValue detecta el cambio automáticamente
+            } catch (error) {
+                toast("❌ Error al unirse");
+                console.error(error);
             }
         };
 
-        // --- TRANSICIÓN AL JUEGO ---
+        // ============================================================
+        // ENTRAR A GRUPO
+        // ============================================================
         async function entrarAGrupo(id, nombre) {
             GRUPO_ACTUAL_ID = id;
             document.getElementById("juego-grupo-nombre").textContent = nombre;
             document.getElementById("juego-grupo-id").textContent = `ID: ${id}`;
-            
-            // Forzar tab de pronosticos al entrar
+
             document.querySelectorAll(".tab-btn").forEach(t => t.classList.remove("active"));
             document.querySelectorAll(".sub-view").forEach(v => v.classList.remove("active"));
             document.querySelector('[data-sub="pronosticos"]').classList.add("active");
             document.getElementById("sub-pronosticos").classList.add("active");
-            
+
             switchView('view-juego');
             document.getElementById("btn-guardar-todo").style.display = "flex";
 
             cargarTodo();
         }
 
-        // --- LÓGICA DE TABS DEL JUEGO ---
+        // ============================================================
+        // TABS DEL JUEGO
+        // ============================================================
         document.querySelectorAll(".tab-btn").forEach(btn => {
             btn.addEventListener("click", () => {
                 document.querySelectorAll(".tab-btn").forEach(t => t.classList.remove("active"));
                 document.querySelectorAll(".sub-view").forEach(v => v.classList.remove("active"));
                 btn.classList.add("active");
                 document.getElementById("sub-" + btn.dataset.sub).classList.add("active");
-                
+
                 const btnTodo = document.getElementById("btn-guardar-todo");
-                if (btn.dataset.sub === "pronosticos") {
-                    btnTodo.style.display = "flex";
-                } else {
-                    btnTodo.style.display = "none";
-                }
+                btnTodo.style.display = btn.dataset.sub === "pronosticos" ? "flex" : "none";
 
                 if (btn.dataset.sub === "posiciones") renderPosiciones();
                 if (btn.dataset.sub === "admin") renderAdmin();
             });
         });
 
-        // --- MOTOR CENTRAL ---
+        // ============================================================
+        // MOTOR CENTRAL
+        // ============================================================
         async function cargarTodo() {
             const [snapP, snapPr] = await Promise.all([
                 get(ref(db, "partidos")),
@@ -574,7 +604,9 @@
             fraseEl.textContent = frases[Math.floor(Math.random() * frases.length)];
             container.appendChild(fraseEl);
 
-            const partidos = Object.entries(partidosCache).sort((a, b) => new Date(String(a[1].fecha).replace(/ /g, "T")) - new Date(String(b[1].fecha).replace(/ /g, "T")));
+            const partidos = Object.entries(partidosCache).sort((a, b) =>
+                new Date(String(a[1].fecha).replace(/ /g, "T")) - new Date(String(b[1].fecha).replace(/ /g, "T"))
+            );
 
             if (!partidos.length) {
                 container.innerHTML += "<div class='loading'>No hay partidos cargados aún.</div>";
@@ -643,24 +675,38 @@
             });
         }
 
+        // ============================================================
+        // GUARDAR PRONÓSTICO INDIVIDUAL
+        // ============================================================
         async function guardarPronostico(key) {
             if (esFechaLimiteExcedida()) return toast("🔒 Tiempo agotado. El prode cerró.");
             const gA = document.getElementById(`gA-${key}`).value;
             const gB = document.getElementById(`gB-${key}`).value;
             if (gA === "" || gB === "") return toast("✍️ Completá ambos goles");
-            
+
             const btn = document.getElementById(`btn-${key}`);
-            btn.disabled = true; btn.textContent = "...";
-            
-            await set(ref(db, `grupos/${GRUPO_ACTUAL_ID}/pronosticos/${currentUser.uid}/${key}`), {
-                goles_A: Number(gA), goles_B: Number(gB), timestamp: Date.now()
-            });
-            
-            pronosticosCache[key] = { goles_A: Number(gA), goles_B: Number(gB) };
-            btn.disabled = false; btn.textContent = "💾 Guardar";
-            toast("🎯 ¡Pronóstico guardado!");
+            btn.disabled = true;
+            btn.textContent = "...";
+
+            try {
+                await set(ref(db, `grupos/${GRUPO_ACTUAL_ID}/pronosticos/${currentUser.uid}/${key}`), {
+                    goles_A: Number(gA), goles_B: Number(gB), timestamp: Date.now()
+                });
+                pronosticosCache[key] = { goles_A: Number(gA), goles_B: Number(gB) };
+                btn.disabled = false;
+                btn.textContent = "💾 Guardar";
+                toast("🎯 ¡Pronóstico guardado!");
+            } catch (e) {
+                btn.disabled = false;
+                btn.textContent = "💾 Guardar";
+                toast("❌ Error al guardar");
+                console.error(e);
+            }
         }
 
+        // ============================================================
+        // GUARDAR TODO
+        // ============================================================
         document.getElementById("btn-guardar-todo").addEventListener("click", async () => {
             if (!currentUser) return;
             if (esFechaLimiteExcedida()) return toast("🔒 Tiempo agotado.");
@@ -690,15 +736,23 @@
                 await update(ref(db), updates);
                 toast(`🚀 ¡${contador} pronósticos guardados!`);
                 renderPronosticos();
-            } catch (e) { toast("❌ Error al guardar en lote"); }
+            } catch (e) {
+                toast("❌ Error al guardar en lote");
+                console.error(e);
+            }
         });
 
+        // ============================================================
+        // TABLA DE POSICIONES
+        // ============================================================
         async function renderPosiciones() {
             const container = document.getElementById("container-posiciones");
             container.innerHTML = '<div class="loading">Calculando posiciones...</div>';
 
             const [snapU, snapP, snapG] = await Promise.all([
-                get(ref(db, "usuarios")), get(ref(db, "partidos")), get(ref(db, `grupos/${GRUPO_ACTUAL_ID}`))
+                get(ref(db, "usuarios")),
+                get(ref(db, "partidos")),
+                get(ref(db, `grupos/${GRUPO_ACTUAL_ID}`))
             ]);
 
             const todosLosUsuarios = snapU.exists() ? snapU.val() : {};
@@ -707,9 +761,10 @@
 
             const participantesGrupo = grupoData.participantes || {};
             const pronTodos = grupoData.pronosticos || {};
-            
-            const finalizados = Object.entries(partidos).filter(([, p]) => 
-                p && p.estado === "finalizado" && (p.fase.toLowerCase().includes("group") || p.fase.toLowerCase().includes("grupo"))
+
+            const finalizados = Object.entries(partidos).filter(([, p]) =>
+                p && p.estado === "finalizado" &&
+                (p.fase.toLowerCase().includes("group") || p.fase.toLowerCase().includes("grupo"))
             );
 
             const tabla = Object.entries(todosLosUsuarios)
@@ -718,11 +773,13 @@
                     const mis = pronTodos[uid] || {};
                     let pts = 0, exactos = 0, ganadores = 0, jugados = 0;
                     finalizados.forEach(([key, p]) => {
-                        const pr = mis[key]; if (!pr) return;
+                        const pr = mis[key];
+                        if (!pr) return;
                         const r = calcularPuntos(pr, { goles_A: p.goles_A_real, goles_B: p.goles_B_real });
                         if (r === null) return;
                         jugados++; pts += r;
-                        if (r === 3) exactos++; if (r >= 1) ganadores++;
+                        if (r === 3) exactos++;
+                        if (r >= 1) ganadores++;
                     });
                     const nombrePerfil = u.perfil ? u.perfil.nombre : (u.nombre || "Jugador");
                     return { uid, nombre: nombrePerfil, pts, exactos, ganadores, jugados };
@@ -770,16 +827,22 @@
             container.innerHTML += `<div class="leyenda">⭐ Exacto = 3 pts · ✓ Tendencia = 1 pt</div>`;
         }
 
+        // ============================================================
+        // ADMIN
+        // ============================================================
         function renderAdmin() {
             const container = document.getElementById("container-admin");
             container.innerHTML = "";
-            const partidos = Object.entries(partidosCache).sort((a, b) => new Date(String(a[1].fecha).replace(/ /g, "T")) - new Date(String(b[1].fecha).replace(/ /g, "T")));
+            const partidos = Object.entries(partidosCache).sort((a, b) =>
+                new Date(String(a[1].fecha).replace(/ /g, "T")) - new Date(String(b[1].fecha).replace(/ /g, "T"))
+            );
 
             partidos.forEach(([key, p]) => {
                 if (!p || !p.equipo_A || !p.equipo_B || !p.fase) return;
                 if (!p.fase.toLowerCase().includes("group") && !p.fase.toLowerCase().includes("grupo")) return;
 
-                const eqA = obtenerInfoEquipo(p.equipo_A); const eqB = obtenerInfoEquipo(p.equipo_B);
+                const eqA = obtenerInfoEquipo(p.equipo_A);
+                const eqB = obtenerInfoEquipo(p.equipo_B);
                 const card = document.createElement("div");
                 card.className = "admin-card";
                 card.innerHTML = `
@@ -805,34 +868,44 @@
             const gB = document.getElementById(`adm-gB-${key}`).value;
             if (gA === "" || gB === "") return toast("✍️ Completá ambos goles");
             await update(ref(db, `partidos/${key}`), { goles_A_real: Number(gA), goles_B_real: Number(gB), estado: "finalizado" });
-            partidosCache[key].goles_A_real = Number(gA); partidosCache[key].goles_B_real = Number(gB); partidosCache[key].estado = "finalizado";
+            partidosCache[key].goles_A_real = Number(gA);
+            partidosCache[key].goles_B_real = Number(gB);
+            partidosCache[key].estado = "finalizado";
             toast(`✅ ${gA} - ${gB} guardado globalmente`);
             renderAdmin();
         }
 
         document.getElementById("btn-recalcular").addEventListener("click", async () => {
-            await cargarTodo(); toast("🔄 Sincronizado");
+            await cargarTodo();
+            toast("🔄 Sincronizado");
         });
 
         document.getElementById("btn-whatsapp").addEventListener("click", async () => {
             const [snapU, snapP, snapG] = await Promise.all([
-                get(ref(db, "usuarios")), get(ref(db, "partidos")), get(ref(db, `grupos/${GRUPO_ACTUAL_ID}`))
+                get(ref(db, "usuarios")),
+                get(ref(db, "partidos")),
+                get(ref(db, `grupos/${GRUPO_ACTUAL_ID}`))
             ]);
-            
+
             const usuarios = snapU.exists() ? snapU.val() : {};
             const partidos = snapP.exists() ? snapP.val() : {};
             const grupoData = snapG.exists() ? snapG.val() : {};
 
             const participantesGrupo = grupoData.participantes || {};
             const pronTodos = grupoData.pronosticos || {};
-            
-            const finalizados = Object.entries(partidos).filter(([, p]) => p && p.estado === "finalizado" && (p.fase.toLowerCase().includes("group") || p.fase.toLowerCase().includes("grupo")));
+
+            const finalizados = Object.entries(partidos).filter(([, p]) =>
+                p && p.estado === "finalizado" &&
+                (p.fase.toLowerCase().includes("group") || p.fase.toLowerCase().includes("grupo"))
+            );
 
             const tabla = Object.entries(usuarios)
                 .filter(([uid]) => participantesGrupo[uid] === true)
                 .map(([uid, u]) => {
                     let pts = 0;
-                    finalizados.forEach(([key, p]) => { if (pronTodos[uid]?.[key]) pts += calcularPuntos(pronTodos[uid][key], { goles_A: p.goles_A_real, goles_B: p.goles_B_real }) || 0; });
+                    finalizados.forEach(([key, p]) => {
+                        if (pronTodos[uid]?.[key]) pts += calcularPuntos(pronTodos[uid][key], { goles_A: p.goles_A_real, goles_B: p.goles_B_real }) || 0;
+                    });
                     const nombrePerfil = u.perfil ? u.perfil.nombre : (u.nombre || "Jugador");
                     return { nombre: nombrePerfil, pts };
                 }).sort((a, b) => b.pts - a.pts);
@@ -842,13 +915,15 @@
             const nombreLiga = document.getElementById("juego-grupo-nombre").textContent.toUpperCase();
             let mensaje = `🏆 *${nombreLiga} - TABLA DE POSICIONES* ⚽\n\n`;
             tabla.forEach((u, i) => {
-                const medallas = ["🥇", "🥈", "🥉"]; const icono = i <= 2 ? medallas[i] : "🏃‍♂️";
-                mensaje += `${icono} *${i+1}° ${u.nombre.split(" ")[0]}:* ${u.pts} pts\n`;
+                const meds = ["🥇", "🥈", "🥉"];
+                const icono = i <= 2 ? meds[i] : "🏃‍♂️";
+                mensaje += `${icono} *${i + 1}° ${u.nombre.split(" ")[0]}:* ${u.pts} pts\n`;
             });
             mensaje += `\n⚠️ Recuerden revisar el fixture y guardar sus pronósticos a tiempo.`;
 
             window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(mensaje)}`, "_blank");
         });
+
     </script>
 </body>
 </html>
